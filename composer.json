@@ -18,7 +18,7 @@
         "league/container": "^2.4",
         "oscarotero/middleland": "^0.4.0",
         "nikic/fast-route": "^1.2",
-        "bit55/templater": "^0.9.0"
+        "bit55/templater": "^0.9.1"
     },
     "autoload": {
         "psr-4": {

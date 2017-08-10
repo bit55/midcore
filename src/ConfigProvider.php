@@ -26,7 +26,6 @@ class ConfigProvider
 
     /**
      * Return dependency mappings for this component.
-     *
      * @return array
      */
     public function getDependencyConfig()
@@ -35,13 +34,13 @@ class ConfigProvider
 
             'factories' => [
                 'templates'  => Factory\TemplaterFactory::class,
+                // ActionHandlerMiddleware::class => ActionHandlerMiddleware::class,
+                // ControllerHandlerMiddleware::class => ControllerHandlerMiddleware::class,
+                // NotFoundHandler::class => NotFoundHandler::class,
             ],
             'invokables' => [
-                ResponseEmitterInterface::class => DiactorosResponseEmitter::class,
-                ActionHandlerMiddleware::class => ActionHandlerMiddleware::class,
-                ControllerHandlerMiddleware::class => ControllerHandlerMiddleware::class,
-                FastRouteMiddleware::class => FastRouteMiddleware::class,
-                NotFoundHandler::class => NotFoundHandler::class,
+                ResponseEmitterInterface::class => DiactorosResponseEmitter::class,                
+                FastRouteMiddleware::class => FastRouteMiddleware::class,                
                 ErrorHandler::class => ErrorHandler::class
             ],
         ];

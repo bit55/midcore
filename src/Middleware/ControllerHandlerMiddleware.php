@@ -10,7 +10,7 @@ use Psr\Container\ContainerInterface;
 
 use Zend\Diactoros\Response\HtmlResponse;
 
-class ControllerDispatcherMiddleware implements MiddlewareInterface
+class ControllerHandlerMiddleware implements MiddlewareInterface
 {
     private $container;
     
