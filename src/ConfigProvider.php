@@ -21,6 +21,12 @@ class ConfigProvider
     {
         return [
             'dependencies' => $this->getDependencyConfig(),
+            
+            'containerConfigCallables' => [function ($container) {
+                $container->share(Middleware\ControllerHandlerMiddleware::class)->withArgument($container);
+                $container->share(Middleware\ActionHandlerMiddleware::class)->withArgument($container);
+                $container->share(Middleware\NotFoundHandler::class)->withArgument($container);
+            }]
         ];
     }
 
