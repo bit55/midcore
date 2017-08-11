@@ -7,10 +7,9 @@ use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Container\ContainerInterface;
+use Middleland\Dispatcher;
 
-use Zend\Diactoros\Response\HtmlResponse;
-
-class ControllerHandlerMiddleware implements MiddlewareInterface
+class ActionHandler implements MiddlewareInterface
 {
     private $container;
     
@@ -25,6 +24,7 @@ class ControllerHandlerMiddleware implements MiddlewareInterface
 
         // Check found
         if ($routeInfo[0] == 1) { // FOUND
+            
             $response = $this->executeHandler($request, $routeInfo[1], $routeInfo[2]);
             
             if ($response instanceof ResponseInterface) {
@@ -44,25 +44,14 @@ class ControllerHandlerMiddleware implements MiddlewareInterface
      */
     public function executeHandler($request, $handler, $vars = null)
     {
-        // execute action in controllers
-        if (!is_array($handler) && !is_callable($handler) && strpos($handler, '@')) {
-            $ca = explode('@', $handler);
-            $controllerName = $ca[0];
-            $action = $ca[1];
-            
-            if (class_exists($controllerName)) {
-                $controller = new $controllerName($request, $this->container);
-            } else {
-                throw new \Exception("Controller class '{$controllerName}' not found");
-            }
-            
-            if (!method_exists($controller, $action)) {
-                throw new \Exception("Method '{$controllerName}::{$action}' not defined");
-            }
-            return call_user_func_array(array($controller, $action), $vars);
-            
-            // $reflectionMethod = new ReflectionMethod('HelloWorld', 'sayHelloTo');
-            // echo $reflectionMethod->invokeArgs(new HelloWorld(), array('Mike'));
+        $request = $request->withAttribute('routeParams', $vars);
+        
+        // execute actions as middleware
+        if (!is_array($handler) || is_callable($handler)) {
+            $handler = [$handler];
         }
+        $dispatcher = new Dispatcher($handler, $this->container);
+        
+        return $dispatcher->dispatch($request);
     }
 }
