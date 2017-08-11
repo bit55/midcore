@@ -21,7 +21,7 @@ interface ControllerInterface
     /**
      * Initialization.
      */
-    function init();
+    public function init();
     
     /**
      * Render template and return response object
@@ -30,7 +30,7 @@ interface ControllerInterface
      * @param array $data
      * @return ResponseInterface
      */
-    function render($template, array $data = []);
+    public function render($template, array $data = []);
     
     /**
      * Render JSON response
@@ -40,7 +40,7 @@ interface ControllerInterface
      * @param array $headers
      * @return ResponseInterface
      */
-    function renderJson($data, $status = 200, array $headers = []);
+    public function renderJson($data, $status = 200, array $headers = []);
     
     /**
      * Redirect response
@@ -50,6 +50,5 @@ interface ControllerInterface
      * @param array $headers
      * @return ResponseInterface
      */
-    function redirect($uri, $status = 302, array $headers = []);
-
+    public function redirect($uri, $status = 302, array $headers = []);
 }

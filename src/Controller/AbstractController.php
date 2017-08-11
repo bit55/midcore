@@ -76,5 +76,5 @@ abstract class AbstractController implements ControllerInterface
     public function redirect($uri, $status = 302, array $headers = [])
     {
         return new RedirectResponse($uri, $status, $headers);
-    }    
+    }
 }

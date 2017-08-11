@@ -23,7 +23,7 @@ class ActionHandler implements MiddlewareInterface
         $routeInfo = $request->getAttribute('routeResult');
 
         // Check found
-        if ($routeInfo[0] == 1) { // FOUND
+        if ($routeInfo[0] == 1 && strpos($routeInfo[1], '@')===false) { // FOUND
             
             $response = $this->executeHandler($request, $routeInfo[1], $routeInfo[2]);
             
@@ -39,7 +39,7 @@ class ActionHandler implements MiddlewareInterface
      /**
      * Executing application action.
      *
-     * @param string|callable $handler
+     * @param string|callable|array $handler
      * @param array $vars
      */
     public function executeHandler($request, $handler, $vars = null)
