@@ -4,6 +4,7 @@ namespace Bit55\Midcore\Controller;
 
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 use Zend\Diactoros\Response\JsonResponse;
 use Zend\Diactoros\Response\RedirectResponse;
@@ -11,7 +12,7 @@ use Zend\Diactoros\Response\RedirectResponse;
 /**
  * Abstract Controller class
  */
-abstract class Controller
+abstract class AbstractController implements ControllerInterface
 {
     protected $container;
     
@@ -20,6 +21,7 @@ abstract class Controller
     /**
      * Constructor.
      *
+     * @param ServerRequestInterface $request
      * @param ContainerInterface $container
      */
     public function __construct(ServerRequestInterface $request, ContainerInterface $container)
@@ -32,7 +34,7 @@ abstract class Controller
     /**
      * Initialization.
      */
-    protected function init()
+    public function init()
     {
     }
     
@@ -41,9 +43,9 @@ abstract class Controller
      *
      * @param string $template
      * @param array $data
-     * @return HtmlResponse
+     * @return ResponseInterface
      */
-    protected function render($template, array $data = [])
+    public function render($template, array $data = [])
     {
         return new HtmlResponse(
             $this->container->get('templates')->render($template, $data)
@@ -56,9 +58,9 @@ abstract class Controller
      * @param array $data
      * @param int $status
      * @param array $headers
-     * @return JsonResponse
+     * @return ResponseInterface
      */
-    protected function renderJson($data, $status = 200, array $headers = [])
+    public function renderJson($data, $status = 200, array $headers = [])
     {
         return new JsonResponse($data, $status, $headers);
     }
@@ -69,20 +71,10 @@ abstract class Controller
      * @param string $uri
      * @param int $status
      * @param array $headers
-     * @return JsonResponse
+     * @return ResponseInterface
      */
-    protected function redirect($uri, $status = 302, array $headers = [])
+    public function redirect($uri, $status = 302, array $headers = [])
     {
         return new RedirectResponse($uri, $status, $headers);
-    }
-    
-    /**
-     * Index Action blueprint
-     *
-     * @return HtmlResponse
-     */
-    public function indexAction()
-    {
-        return new HtmlResponse('Abstract Index Action');
-    }
+    }    
 }
