@@ -1,6 +1,6 @@
 <?php
 
-namespace Bit55\Midcore\Factory;
+namespace Bit55\Midcore\Template;
 
 use Psr\Container\ContainerInterface;
 use Bit55\Templater\TemplateRenderer;

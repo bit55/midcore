@@ -13,19 +13,15 @@ class ConfigProvider
         return [
             'dependencies' => [
                 'factories' => [
-                    'templates'  => Factory\TemplaterFactory::class,
+                    'templates'  => Template\TemplaterFactory::class,
+                    Middleware\ControllerHandler::class => Middleware\ControllerHandlerFactory::class,
+                    Middleware\ActionHandler::class => Middleware\ActionHandlerFactory::class,
+                    Middleware\NotFoundHandler::class => Middleware\NotFoundHandlerFactory::class,
                 ],
                 'invokables' => [
                     Response\ResponseEmitterInterface::class => Response\DiactorosResponseEmitter::class,
                     Middleware\FastRouteMiddleware::class => Middleware\FastRouteMiddleware::class,
                     Middleware\ErrorHandler::class => Middleware\ErrorHandler::class
-                ],
-                'callables' => [
-                    function ($container) {
-                        $container->share(Middleware\ControllerHandler::class)->withArgument($container);
-                        $container->share(Middleware\ActionHandler::class)->withArgument($container);
-                        $container->share(Middleware\NotFoundHandler::class)->withArgument($container);
-                    }
                 ]
             ]
         ];
