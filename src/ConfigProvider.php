@@ -14,7 +14,6 @@ class ConfigProvider
             'dependencies' => [
                 'factories' => [
                     'templates'  => Template\TemplaterFactory::class,
-                    Middleware\ControllerHandler::class => Middleware\ControllerHandlerFactory::class,
                     Middleware\ActionHandler::class => Middleware\ActionHandlerFactory::class,
                     Middleware\NotFoundHandler::class => Middleware\NotFoundHandlerFactory::class,
                 ],
