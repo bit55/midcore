@@ -24,7 +24,8 @@ class ActionHandler implements MiddlewareInterface
 
         // Check found
         if ($routeInfo[0] == 1) { // FOUND
-            $response = $this->executeHandler($request, $routeInfo[1], $routeInfo[2]);
+            $request = $request->withAttribute('routeParams', $routeInfo[2]);
+            $response = $this->executeHandler($request, $routeInfo[1]);
             
             if ($response instanceof ResponseInterface) {
                 return $response;
@@ -39,12 +40,9 @@ class ActionHandler implements MiddlewareInterface
      * Executing application action.
      *
      * @param string|callable|array $handler
-     * @param array $vars
      */
-    public function executeHandler($request, $handler, $vars = null)
+    public function executeHandler($request, $handler)
     {
-        $request = $request->withAttribute('routeParams', $vars);
-        
         // execute actions as middleware
         if (!is_array($handler) || is_callable($handler)) {
             $handler = [$handler];
