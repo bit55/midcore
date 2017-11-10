@@ -22,11 +22,8 @@ class NotFoundHandler implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {
-        
-
-        //return new HtmlResponse('Not found');
-        return new HtmlResponse(
+        return (new HtmlResponse(
                 $this->template->render('error::404')
-            );
+            ))->withStatus(404);
     }
 }
