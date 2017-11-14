@@ -1,6 +1,6 @@
 {
     "name": "bit55/midcore",
-    "description": "Middleware web application core PSR-7, PSR-11, PSR-15 compatible.",
+    "description": "Middleware web application core PSR-7, PSR-11, PSR-15 compatible",
     "type": "library",
     "license": "BSD-3-Clause",
     "authors": [
