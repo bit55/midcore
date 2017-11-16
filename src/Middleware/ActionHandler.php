@@ -45,7 +45,7 @@ class ActionHandler implements MiddlewareInterface
     {
         // execute actions as middleware
         if (!is_array($handler) || is_callable($handler)) {
-            $handler = [$handler];
+            $handler = [$handler, \Bit55\Midcore\Middleware\NotFoundHandler::class];
         }
         $dispatcher = new Dispatcher($handler, $this->container);
         
