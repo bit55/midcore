@@ -10,6 +10,6 @@ class TemplatedActionFactory
     public function __invoke(ContainerInterface $container, string $alias)
     {
         $template = $container->get('templates'); //@todo TemplateManager, TemplateRenderer
-        return new $alias($template, $container); //@note Prevent using container in Actions as possible
+        return new $alias($template); //@note Prevent using container in Actions as possible
     }
 }
