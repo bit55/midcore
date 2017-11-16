@@ -9,7 +9,7 @@ use Zend\Diactoros\Response\HtmlResponse;
 use Psr\Http\Message\ServerRequestInterface;
 use Bit55\Templater\TemplateRenderer;
 
-abstract class AbstractAction implements MiddlewareInterface
+abstract class TemplatedAction implements MiddlewareInterface
 {
     protected $template;
     

@@ -5,7 +5,7 @@ namespace Bit55\Midcore\Middleware;
 
 use Psr\Container\ContainerInterface;
 
-class AbstractActionFactory
+class TemplatedActionFactory
 {
     public function __invoke(ContainerInterface $container, string $alias)
     {
