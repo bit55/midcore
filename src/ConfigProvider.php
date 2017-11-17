@@ -13,7 +13,7 @@ class ConfigProvider
         return [
             'dependencies' => [
                 'factories' => [
-                    'templates'  => Template\TemplaterFactory::class,
+                    'templates'  => Template\TemplateManagerFactory::class,
                     Middleware\ActionHandler::class => Middleware\ActionHandlerFactory::class,
                     Middleware\NotFoundHandler::class => Middleware\NotFoundHandlerFactory::class,
                 ],

@@ -12,13 +12,13 @@
     "minimum-stability": "stable",
     "homepage": "https://github.com/bit55/midcore",
     "require": {
-        "php": "^7.0 || ^5.6",
+        "php": "^7.0",
         "zendframework/zend-config-aggregator": "^1.0",
         "zendframework/zend-diactoros": "^1.4",
         "league/container": "^2.4",
         "oscarotero/middleland": "^0.4.0",
         "nikic/fast-route": "^1.2",
-        "bit55/templater": "^0.9.1"
+        "bit55/templater": "@dev"
     },
     "autoload": {
         "psr-4": {

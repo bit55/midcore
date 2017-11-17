@@ -6,14 +6,17 @@ namespace Bit55\Midcore\Middleware;
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface;
 use Zend\Diactoros\Response\HtmlResponse;
+use Zend\Diactoros\Response\JsonResponse;
+use Zend\Diactoros\Response\RedirectResponse;
 use Psr\Http\Message\ServerRequestInterface;
-use Bit55\Templater\TemplateRenderer;
+use Psr\Http\Message\ResponseInterface;
+use Bit55\Templater\TemplateManager;
 
 abstract class TemplatedAction implements MiddlewareInterface
 {
     protected $template;
     
-    public function __construct(TemplateRenderer $template = null)
+    public function __construct(TemplateManager $template = null)
     {
         $this->template = $template;
     }
@@ -43,7 +46,7 @@ abstract class TemplatedAction implements MiddlewareInterface
      * @param array $data
      * @param int $status
      * @param array $headers
-     * @return JsonResponse
+     * @return ResponseInterface
      */
     protected function renderJson($data, $status = 200, array $headers = [])
     {
@@ -57,7 +60,7 @@ abstract class TemplatedAction implements MiddlewareInterface
      * @param string $uri
      * @param int $status
      * @param array $headers
-     * @return JsonResponse
+     * @return ResponseInterface
      */
     protected function redirect($uri, $status = 302, array $headers = [])
     {
