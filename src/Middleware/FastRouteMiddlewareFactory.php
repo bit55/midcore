@@ -4,7 +4,7 @@ namespace Bit55\Midcore\Middleware;
 
 use Psr\Container\ContainerInterface;
 
-class FastRouteMiddleware
+class FastRouteMiddlewareFactory
 {
     public function __invoke(ContainerInterface $container)
     {
