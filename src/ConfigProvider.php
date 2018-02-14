@@ -6,6 +6,7 @@ class ConfigProvider
 {
     /**
      * Return configuration array.
+     *
      * @return array
      */
     public function __invoke()
@@ -13,14 +14,12 @@ class ConfigProvider
         return [
             'dependencies' => [
                 'factories' => [
-                    //'templates'  => Template\TemplateManagerFactory::class,
-                    Middleware\ActionHandler::class => Middleware\ActionHandlerFactory::class,
-                    Middleware\NotFoundHandler::class => Middleware\NotFoundHandlerFactory::class,
+                    Middleware\RouteActionHandler::class     => Middleware\RouteActionHandlerFactory::class,
+                    Middleware\NotFoundHandler::class        => Middleware\NotFoundHandlerFactory::class,
+                    Middleware\FastRouteMiddleware::class    => Middleware\FastRouteMiddlewareFactory::class,
                 ],
                 'invokables' => [
-                    Response\ResponseEmitterInterface::class => Response\DiactorosResponseEmitter::class,
-                    Middleware\FastRouteMiddleware::class => Middleware\FastRouteMiddleware::class,
-                    Middleware\ErrorHandler::class => Middleware\ErrorHandler::class
+                    Middleware\ErrorHandler::class           => Middleware\ErrorHandler::class
                 ]
             ]
         ];

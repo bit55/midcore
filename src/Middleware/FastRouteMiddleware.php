@@ -2,28 +2,38 @@
 
 namespace Bit55\Midcore\Middleware;
 
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Container\ContainerInterface;
 
 class FastRouteMiddleware implements MiddlewareInterface
 {
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    private $routesConfig;
+
+    public function __construct($routesConfig)
+    {
+        $this->routesConfig = $routesConfig;
+    }
+
+
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler)
     {
         // Process routes
-        $dispatcher = \FastRoute\simpleDispatcher(function (\FastRoute\RouteCollector $route) {
-            require 'config/routes.php';
-        });
+        $dispatcher = \FastRoute\simpleDispatcher(
+            function (\FastRoute\RouteCollector $route) {
+                include $this->routesConfig;
+            }
+        );
 
         // Dispatch request
         $method = strtoupper($request->getMethod());
-        
+
         $routeInfo = $dispatcher->dispatch($method, $request->getUri()->getPath());
-        
+
         $request = $request->withAttribute('routeResult', $routeInfo);
 
-        return $delegate->process($request);
+        return $handler->handle($request);
     }
 }

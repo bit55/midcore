@@ -2,15 +2,15 @@
 
 namespace Bit55\Midcore\Middleware;
 
-use Interop\Http\ServerMiddleware\DelegateInterface;
-use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+use Psr\Http\Server\MiddlewareInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\TextResponse;
 
 class ErrorHandler implements MiddlewareInterface
 {
-    public function process(ServerRequestInterface $request, DelegateInterface $delegate)
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler)
     {
         $whoops = new \Whoops\Run;
         $whoops->pushHandler(new \Whoops\Handler\PlainTextHandler);
@@ -19,7 +19,7 @@ class ErrorHandler implements MiddlewareInterface
         /* set_error_handler($this->createErrorHandler());
 
         try {
-            return $delegate->process($request);
+            return $handler->handle($request);
         } catch (Throwable $e) {
         } catch (Exception $e) {
         }
@@ -33,7 +33,7 @@ class ErrorHandler implements MiddlewareInterface
             $e->getTraceAsString()
         ), 500); */
         
-        return $delegate->process($request);
+        return $handler->handle($request);
     }
     
     /**

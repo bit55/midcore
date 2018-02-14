@@ -1,8 +1,17 @@
 {
     "name": "bit55/midcore",
-    "description": "Middleware web application core PSR-7, PSR-11, PSR-15 compatible",
+    "description": "Middleware web application microframework that conforms PSR-15",
     "type": "library",
     "license": "BSD-3-Clause",
+    "keywords": [
+        "http",
+        "middleware",
+        "microframework",
+        "psr",
+        "psr-7",
+        "psr-11",
+        "psr-15"
+    ],
     "authors": [
         {
             "name": "Eugene Dementyev",
@@ -14,15 +23,31 @@
     "require": {
         "php": "^7.0",
         "zendframework/zend-config-aggregator": "^1.0",
-        "zendframework/zend-diactoros": "^1.4",
+        "zendframework/zend-diactoros": "^1.7",
         "league/container": "^2.4",
-        "oscarotero/middleland": "^0.4.0",
-        "nikic/fast-route": "^1.2",
-        "bit55/templater": "@dev"
+        "oscarotero/middleland": "^1.0.0",
+        "nikic/fast-route": "^1.2"
     },
     "autoload": {
         "psr-4": {
             "Bit55\\Midcore\\": "src/"
         }
+    },
+    "scripts": {
+        "check": [
+            "@license-check",
+            "@cs-check",
+            "@test"
+        ],
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "test": "phpunit --colors=always",
+        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
+        "license-check": "docheader check src/ test/"
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
     }
 }
