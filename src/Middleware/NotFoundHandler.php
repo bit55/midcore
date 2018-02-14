@@ -6,6 +6,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use Zend\Diactoros\Response\HtmlResponse;
 
 class NotFoundHandler implements MiddlewareInterface
@@ -20,7 +21,7 @@ class NotFoundHandler implements MiddlewareInterface
         $this->template = $container->get('templates');
     }
 
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler)
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         return (new HtmlResponse(
             $this->template->render('error::404')

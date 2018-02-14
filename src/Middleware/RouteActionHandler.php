@@ -18,7 +18,7 @@ class RouteActionHandler implements MiddlewareInterface
         $this->container = $container;
     }
 
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler)
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $routeInfo = $request->getAttribute('routeResult');
 

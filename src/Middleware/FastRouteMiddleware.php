@@ -18,7 +18,7 @@ class FastRouteMiddleware implements MiddlewareInterface
     }
 
 
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler)
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         // Process routes
         $dispatcher = \FastRoute\simpleDispatcher(
