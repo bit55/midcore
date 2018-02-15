@@ -16,12 +16,12 @@ class ConfigProvider
         return [
             'dependencies' => [
                 'factories' => [
-                    Middleware\RouteActionHandler::class     => Middleware\RouteActionHandlerFactory::class,
-                    Middleware\NotFoundHandler::class        => Middleware\NotFoundHandlerFactory::class,
                     Middleware\FastRouteMiddleware::class    => Middleware\FastRouteMiddlewareFactory::class,
+                    Middleware\RouteActionHandler::class     => Middleware\RouteActionHandlerFactory::class,                   
                 ],
                 'invokables' => [
-                    Middleware\ErrorHandler::class           => Middleware\ErrorHandler::class
+                    Middleware\ErrorHandler::class           => Middleware\ErrorHandler::class,
+                    Middleware\NotFoundHandler::class           => Middleware\NotFoundHandler::class
                 ]
             ]
         ];
