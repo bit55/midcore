@@ -8,6 +8,6 @@ class FastRouteMiddlewareFactory
 {
     public function __invoke(ContainerInterface $container)
     {
-        return new FastRouteMiddleware($container->get('routesConfig'));
+        return new FastRouteMiddleware($container->get('config')['routesConfig']);
     }
 }

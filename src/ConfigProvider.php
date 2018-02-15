@@ -2,6 +2,8 @@
 
 namespace Bit55\Midcore;
 
+//use Bit55\Midcore\Middleware;
+
 class ConfigProvider
 {
     /**
